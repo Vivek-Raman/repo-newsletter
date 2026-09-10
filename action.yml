@@ -1,0 +1,33 @@
+name: Generate PR newsletter
+description: Generate a newsletter from recently merged pull requests
+author: PR newsletter
+
+inputs:
+  lookback_days:
+    description: Number of rolling days to inspect for merged pull requests
+    required: false
+    default: '7'
+  output_path:
+    description: Path for the generated newsletter Markdown file
+    required: false
+    default: pr-newsletter.md
+  model:
+    description: OpenAI model used to generate the newsletter
+    required: false
+    default: gpt-5
+  github_token:
+    description: GitHub token used to read pull requests
+    required: true
+  openai_api_key:
+    description: OpenAI API key used to generate the newsletter
+    required: true
+
+outputs:
+  has_prs:
+    description: Whether at least one pull request was found
+  output_path:
+    description: Path where the generated newsletter was written
+
+runs:
+  using: node20
+  main: src/index.js
